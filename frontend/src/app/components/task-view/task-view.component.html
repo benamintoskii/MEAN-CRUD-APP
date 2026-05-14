@@ -1,0 +1,37 @@
+<div class="task-view-container">
+  <div class="header">
+    <h1>View Task</h1>
+    <a routerLink="/" class="btn btn-secondary">Back to Tasks</a>
+  </div>
+
+  <div *ngIf="loading" class="loading-overlay">
+    Loading...
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div class="view-card" *ngIf="task && !loading">
+    <div class="field">
+      <span class="label">Title</span>
+      <h2 class="value">{{ task.title }}</h2>
+    </div>
+    
+    <div class="field">
+      <span class="label">Description</span>
+      <p class="value description">{{ task.description || 'No description provided.' }}</p>
+    </div>
+
+    <div class="field">
+      <span class="label">Status</span>
+      <div class="value status-badge" [ngClass]="{'completed': task.completed}">
+        {{ task.completed ? 'Completed' : 'Pending' }}
+      </div>
+    </div>
+
+    <div class="view-actions">
+      <a [routerLink]="['/edit', task._id]" class="btn btn-primary">Edit Task</a>
+    </div>
+  </div>
+</div>

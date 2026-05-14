@@ -1,0 +1,51 @@
+<div class="task-form-container">
+  <div class="header">
+    <h1>{{ isEditMode ? 'Edit Task' : 'New Task' }}</h1>
+    <a routerLink="/" class="btn btn-secondary">Back to Tasks</a>
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div class="form-card">
+    <div *ngIf="loading && isEditMode" class="loading-overlay">
+      Loading...
+    </div>
+
+    <form (ngSubmit)="onSubmit()" #taskForm="ngForm">
+      <div class="form-group">
+        <label for="title">Task Title <span class="required">*</span></label>
+        <input 
+          type="text" 
+          id="title" 
+          name="title" 
+          [(ngModel)]="task.title" 
+          required 
+          placeholder="e.g., Buy groceries"
+          class="form-control"
+          [ngClass]="{'is-invalid': taskForm.submitted && !task.title}"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description (Optional)</label>
+        <textarea 
+          id="description" 
+          name="description" 
+          [(ngModel)]="task.description" 
+          placeholder="Add more details about this task..."
+          class="form-control"
+          rows="4"
+        ></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" routerLink="/" class="btn btn-secondary">Cancel</button>
+        <button type="submit" class="btn btn-primary" [disabled]="loading">
+          {{ loading ? 'Saving...' : (isEditMode ? 'Update Task' : 'Create Task') }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

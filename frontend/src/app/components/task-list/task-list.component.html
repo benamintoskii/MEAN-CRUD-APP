@@ -1,0 +1,33 @@
+<div class="task-list-container">
+  <div class="header">
+    <h1>My Tasks</h1>
+    <a routerLink="/add" class="btn btn-primary">Add Task</a>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    Loading tasks...
+  </div>
+
+  <div *ngIf="!loading && tasks.length === 0" class="empty-state">
+    <p>No tasks found. Create one to get started!</p>
+  </div>
+
+  <div class="task-grid" *ngIf="!loading && tasks.length > 0">
+    <div class="task-card" *ngFor="let task of tasks" [ngClass]="{'completed': task.completed}">
+      <div class="task-content">
+        <h3 class="task-title">
+          <span class="status-indicator"></span>
+          {{ task.title }}
+        </h3>
+        <p class="task-description" *ngIf="task.description">{{ task.description }}</p>
+      </div>
+      <div class="task-actions">
+        <button *ngIf="!task.completed" (click)="toggleCompletion(task)" class="btn btn-success btn-sm">Complete</button>
+        <button *ngIf="task.completed" (click)="toggleCompletion(task)" class="btn btn-warning btn-sm">Undo</button>
+        <a [routerLink]="['/view', task._id]" class="btn btn-info btn-sm">View</a>
+        <a [routerLink]="['/edit', task._id]" class="btn btn-secondary btn-sm">Edit</a>
+        <button (click)="deleteTask(task._id)" class="btn btn-danger btn-sm">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
