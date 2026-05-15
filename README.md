@@ -35,6 +35,7 @@ project/
 │
 ├── backend/
 ├── frontend/
+├── demo/
 └── README.md
 ```
 
@@ -129,8 +130,20 @@ assets/screenshots/
 Example:
 
 ```md
-![App Screenshot](assets/screenshots/app.png)
+![Application Screenshot](assets/screenshots/app.png)
 ```
+
+---
+
+# Demo Video
+
+A demo video explaining the project functionality is included inside the following folder:
+
+```bash
+demo/
+```
+
+Please extract the compressed file first before watching the video.
 
 ---
 
